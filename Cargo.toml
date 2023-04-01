@@ -1,22 +1,24 @@
 [package]
 name = "simple-home-dir"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "A simple and miniscule library allowing one to easily access the user's home directory."
-keywords = ["home", "directory"]
+keywords = ["home", "directory", "tilde"]
 categories = ["accessibility"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [profile.release]
-opt-level = "s"
 lto = "fat"
 incremental = true
 codegen-units = 1
+
+[features]
+expand_tilde = []
 
 [target.'cfg(windows)'.dependencies.windows-sys]
 version = "0.48.0"
