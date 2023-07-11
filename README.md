@@ -1,6 +1,6 @@
 # simple-home-dir
 
-An extremely small library purposed to retrieve the user's home directory.
+An extremely small and optimized library purposed to retrieve the user's home directory.
 
 ## How to Use:
 ```rust
@@ -12,6 +12,15 @@ fn main() {
 }
 ```
 And that's it!
+```rust
+use simple_home_dir::expand_tilde;
+
+fn main() {
+    //  "/home/USER/local/share"
+    let expanded = simple_home_dir::expand_tilde("~/.local/share").unwrap();
+}
+```
+There's also the `expand_tilde` feature (disabled by default) which can *expand* upon the tilde from a given path.
 
 ## Compatibility
 This works on most operating systems.
