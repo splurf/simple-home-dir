@@ -16,7 +16,7 @@ And that's it!
 use simple_home_dir::expand_tilde;
 
 fn main() {
-    //  "/home/USER/local/share"
+    //  "/home/USER/.local/share"
     let expanded = simple_home_dir::expand_tilde("~/.local/share").unwrap();
 }
 ```
