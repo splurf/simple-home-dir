@@ -31,7 +31,7 @@ mod expand_tilde {
     }
 }
 
-#[cfg(target_os = "windows")]
+#[cfg(target_family = "windows")]
 mod home_dir_windows {
     use {
         core::slice::from_raw_parts,
@@ -65,7 +65,7 @@ mod home_dir_windows {
     }
 }
 
-#[cfg(not(target_os = "windows"))]
+#[cfg(not(target_family = "windows"))]
 mod home_dir_ne_windows {
     use std::{env::var_os, path::PathBuf};
 
@@ -82,10 +82,10 @@ mod home_dir_ne_windows {
     }
 }
 
-#[cfg(target_os = "windows")]
+#[cfg(target_family = "windows")]
 pub use home_dir_windows::*;
 
-#[cfg(not(target_os = "windows"))]
+#[cfg(target_family = "unix")]
 pub use home_dir_ne_windows::*;
 
 #[cfg(feature = "expand_tilde")]

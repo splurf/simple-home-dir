@@ -1,4 +1,5 @@
 # simple-home-dir
+[![Crate](https://img.shields.io/crates/v/simple-home-dir.svg)](https://crates.io/crates/simple-home-dir)
 
 An extremely small and optimized library purposed to retrieve the user's home directory.
 
@@ -22,8 +23,5 @@ fn main() {
 ```
 There's also the `expand_tilde` feature (disabled by default) which can *expand* upon the tilde from a given path.
 
-## Compatibility
-This works on most operating systems.
-
 ### Credit
-The majority of the Windows portion of this has been noted from the [windows-sys](https://crates.io/crates/windows-sys) and [directories](https://crates.io/crates/directories) crates.
+> The majority of the Windows portion of this has been noted from the [windows-sys](https://crates.io/crates/windows-sys) and [directories](https://crates.io/crates/directories) crates.
