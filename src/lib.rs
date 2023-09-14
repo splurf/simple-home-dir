@@ -1,36 +1,3 @@
-#[cfg(feature = "expand_tilde")]
-mod expand_tilde {
-    use {
-        super::home_dir,
-        std::path::{Path, PathBuf},
-    };
-
-    const TILDE: &'static str = "~";
-
-    /// Expand the tilde that originates in the provided path.
-    ///
-    /// ```
-    /// //  "/home/USER/local/share"
-    /// let expanded = simple_home_dir::expand_tilde("~/.local/share").unwrap();
-    /// ```
-    pub fn expand_tilde(path: impl AsRef<Path>) -> Option<PathBuf> {
-        let p = path.as_ref();
-
-        Some(if p.starts_with(TILDE) {
-            let mut home = home_dir()?;
-
-            if !p.ends_with(TILDE) {
-                let mut cmpts = p.components();
-                cmpts.next()?;
-                home.extend(cmpts);
-            }
-            home
-        } else {
-            p.to_path_buf()
-        })
-    }
-}
-
 #[cfg(target_family = "windows")]
 mod home_dir_windows {
     use {
@@ -51,8 +18,9 @@ mod home_dir_windows {
     /// Return the user's home directory.
     ///
     /// ```
-    /// //  "C:\Users\USER"
-    /// let path = simple_home_dir::home_dir().unwrap();
+    /// use simple_home_dir::home_dir;
+    ///
+    /// let path = home_dir().unwrap();
     /// ```
     pub fn home_dir() -> Option<PathBuf> {
         let mut path_ptr = null_mut();
@@ -64,6 +32,8 @@ mod home_dir_windows {
         })
     }
 }
+#[cfg(target_family = "windows")]
+pub use home_dir_windows::*;
 
 #[cfg(not(target_family = "windows"))]
 mod home_dir_ne_windows {
@@ -74,19 +44,73 @@ mod home_dir_ne_windows {
     /// Return the user's home directory.
     ///
     /// ```
-    /// //  "/home/USER"
-    /// let path = simple_home_dir::home_dir().unwrap();
+    /// use simple_home_dir::home_dir;
+    ///
+    /// let path = home_dir().unwrap();
     /// ```
     pub fn home_dir() -> Option<PathBuf> {
         var_os(HOME).map(Into::into)
     }
 }
-
-#[cfg(target_family = "windows")]
-pub use home_dir_windows::*;
-
-#[cfg(target_family = "unix")]
+#[cfg(not(target_family = "windows"))]
 pub use home_dir_ne_windows::*;
 
 #[cfg(feature = "expand_tilde")]
+mod expand_tilde {
+    use {
+        super::home_dir,
+        std::path::{Path, PathBuf},
+    };
+
+    const TILDE: &'static str = "~";
+
+    /// Expand the tilde that originates in the provided path.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use simple_home_dir::expand_tilde;
+    ///
+    /// let expanded = expand_tilde("~/.local").unwrap();
+    /// ```
+    pub fn expand_tilde(path: impl AsRef<Path>) -> Option<PathBuf> {
+        let p = path.as_ref();
+
+        Some(if p.starts_with(TILDE) {
+            let mut home = home_dir()?;
+
+            if !p.ends_with(TILDE) {
+                let mut cmpts = p.components();
+                cmpts.next()?;
+                home.extend(cmpts);
+            }
+            home
+        } else {
+            p.to_path_buf()
+        })
+    }
+}
+#[cfg(feature = "expand_tilde")]
 pub use expand_tilde::*;
+
+#[cfg(feature = "test")]
+mod test {
+    mod expand_tilde {
+        #[test]
+        fn expand_tilde_test() {
+            let mut expected = dirs::home_dir().unwrap();
+            expected.push("foo");
+            let expanded = crate::expand_tilde("~/foo").unwrap();
+            assert_eq!(expanded, expected)
+        }
+    }
+
+    mod home_dir {
+        #[test]
+        fn home_dir_test() {
+            let expected = dirs::home_dir().unwrap();
+            let home_dir = crate::home_dir().unwrap();
+            assert_eq!(home_dir, expected)
+        }
+    }
+}
