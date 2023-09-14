@@ -1,6 +1,6 @@
 [package]
 name = "simple-home-dir"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2021"
 
 license = "MIT"
@@ -10,12 +10,10 @@ description = "An extremely small and simple library purposed to retrieve the us
 keywords = ["home", "directory", "tilde"]
 categories = ["accessibility"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [profile.release]
-lto = "fat"
-incremental = true
-codegen-units = 1
+strip = true
+opt-level = "z"
+lto = "thin"
 
 [dependencies.dirs]
 version = "5.0.1"
