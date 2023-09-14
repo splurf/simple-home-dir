@@ -8,8 +8,8 @@ An extremely small and optimized library purposed to retrieve the user's home di
 use simple_home_dir::*;
 
 fn main() {
+    // "/home/<USER>"
     let path = home_dir().unwrap();
-    println!("{}", path.display())
 }
 ```
 And that's it!
@@ -17,8 +17,8 @@ And that's it!
 use simple_home_dir::expand_tilde;
 
 fn main() {
-    //  "/home/USER/.local/share"
-    let expanded = simple_home_dir::expand_tilde("~/.local/share").unwrap();
+    // "/home/<USER>/.local"
+    let expanded = simple_home_dir::expand_tilde("~/.local").unwrap();
 }
 ```
 There's also the `expand_tilde` feature (disabled by default) which can *expand* upon the tilde from a given path.
