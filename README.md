@@ -14,11 +14,11 @@ fn main() {
 ```
 And that's it!
 ```rust
-use simple_home_dir::expand_tilde;
+use simple_home_dir::*;
 
 fn main() {
     // "/home/<USER>/.local"
-    let expanded = simple_home_dir::expand_tilde("~/.local").unwrap();
+    let expanded = expand_tilde("~/.local").unwrap();
 }
 ```
 There's also the `expand_tilde` feature (disabled by default) which can *expand* upon the tilde from a given path.
