@@ -1,6 +1,6 @@
 [package]
 name = "simple-home-dir"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 
 license = "MIT"
@@ -12,7 +12,6 @@ categories = ["accessibility"]
 
 [profile.release]
 lto = "thin"
-overflow-checks = false
 codegen-units = 1
 
 [dependencies.dirs]
@@ -27,6 +26,6 @@ features = ["Win32_Foundation", "Win32_Globalization", "Win32_System", "Win32_Sy
 
 [features]
 default = ["home_dir"]
-test = ["dirs", "expand_tilde", "home_dir"]
-expand_tilde = []
 home_dir = []
+expand_tilde = ["home_dir"]
+test = ["dirs", "expand_tilde"]
