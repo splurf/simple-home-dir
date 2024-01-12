@@ -17,7 +17,8 @@ mod home_dir {
 
     /// Return the path of the user's home directory.
     pub fn home_dir() -> Option<std::path::PathBuf> {
-        if cfg!(target_family = "windows") {
+        #[cfg(target_family = "windows")]
+        {
             let mut path_ptr = null_mut();
             (unsafe { SHGetKnownFolderPath(&FOLDERID_Profile, 0, 0, &mut path_ptr) } == 0)
                 .then_some({
@@ -26,9 +27,10 @@ mod home_dir {
                     unsafe { CoTaskMemFree(path_ptr as *const c_void) }
                     ostr.into()
                 })
-        } else {
-            std::env::var_os("HOME").map(Into::into)
         }
+
+        #[cfg(not(target_family = "windows"))]
+        std::env::var_os("HOME").map(Into::into)
     }
 }
 #[cfg(feature = "home_dir")]
