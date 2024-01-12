@@ -115,7 +115,7 @@ dependencies = [
 
 [[package]]
 name = "simple-home-dir"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "dirs",
  "windows-sys 0.52.0",
