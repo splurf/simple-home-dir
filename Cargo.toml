@@ -1,31 +1,22 @@
 [package]
 name = "simple-home-dir"
-version = "0.2.3"
+version = "0.3.0"
 edition = "2021"
 
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "An extremely small and simple library purposed to retrieve the user's home directory."
-keywords = ["home", "directory", "tilde"]
+keywords = ["home", "directory", "path", "light"]
 categories = ["accessibility"]
+
+[dev-dependencies.dirs]
+version = "5.0.1"
+
+[target.'cfg(windows)'.dependencies.windows-sys]
+version = "0.52.0"
+features = ["Win32_Foundation", "Win32_Globalization", "Win32_System", "Win32_System_Com", "Win32_UI", "Win32_UI_Shell"]
 
 [profile.release]
 lto = "thin"
 codegen-units = 1
-
-[dependencies.dirs]
-version = "5.0.1"
-default-features = false
-optional = true
-
-[target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.52.0"
-default-features = false
-features = ["Win32_Foundation", "Win32_Globalization", "Win32_System", "Win32_System_Com", "Win32_UI", "Win32_UI_Shell"]
-
-[features]
-default = ["home_dir"]
-home_dir = []
-expand_tilde = ["home_dir"]
-test = ["dirs", "expand_tilde"]
