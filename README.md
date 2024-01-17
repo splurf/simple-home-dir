@@ -16,6 +16,9 @@ fn main() {
 }
 ```
 
+## Features
+The `expand_tilde` feature is available [here](https://crates.io/crates/simple-home-dir/0.2.3).
+
 ### Testing
 The [dirs](https://crates.io/crates/dirs) crate is relied upon to ensure that the functions of this crate are working properly.
 
