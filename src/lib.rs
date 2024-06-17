@@ -1,29 +1,19 @@
-#[cfg(target_family = "windows")]
-use {
-    core::slice::from_raw_parts,
-    std::{
-        ffi::{c_void, OsString},
-        os::windows::prelude::OsStringExt,
-        ptr::null_mut,
-    },
-    windows_sys::Win32::{
-        Globalization::lstrlenW,
-        System::Com::CoTaskMemFree,
-        UI::Shell::{FOLDERID_Profile, SHGetKnownFolderPath},
-    },
-};
-
 /// Return the path of the user's home directory.
 pub fn home_dir() -> Option<std::path::PathBuf> {
     #[cfg(target_family = "windows")]
     {
-        let mut path_ptr = null_mut();
-        (unsafe { SHGetKnownFolderPath(&FOLDERID_Profile, 0, 0, &mut path_ptr) } == 0).then_some({
-            let wide = unsafe { from_raw_parts(path_ptr, lstrlenW(path_ptr) as usize) };
-            let ostr = OsString::from_wide(wide);
-            unsafe { CoTaskMemFree(path_ptr as *const c_void) }
-            ostr.into()
-        })
+        use windows_sys::Win32::{UI::Shell::*, *};
+
+        let mut p = std::ptr::null_mut();
+        let r = if unsafe { SHGetKnownFolderPath(&FOLDERID_Profile, 0, 0, &mut p) } == 0 {
+            let w = unsafe { core::slice::from_raw_parts(p, Globalization::lstrlenW(p) as _) };
+            let o: std::ffi::OsString = std::os::windows::ffi::OsStringExt::from_wide(w);
+            Some(o.into())
+        } else {
+            None
+        };
+        unsafe { System::Com::CoTaskMemFree(p as _) }
+        r
     }
 
     #[cfg(not(target_family = "windows"))]
