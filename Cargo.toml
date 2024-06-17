@@ -1,13 +1,13 @@
 [package]
 name = "simple-home-dir"
-version = "0.3.4"
+version = "0.3.5"
 edition = "2021"
 
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "Efficiently retrieve the user's home directory."
-keywords = ["home", "directory", "path", "fast", "lightweight"]
+keywords = ["home", "directory", "fast", "path", "lightweight"]
 categories = ["accessibility"]
 
 [dev-dependencies.dirs]
