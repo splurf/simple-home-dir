@@ -8,14 +8,7 @@ authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "Efficiently retrieve the user's home directory."
 keywords = ["home", "directory", "fast", "path", "lightweight"]
 categories = ["accessibility"]
-exclude = [
-    ".github/",
-    ".gitignore",
-    "Cargo.toml.orig",
-    "LICENSE",
-    "README.md",
-    "tests/",
-]
+exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 
 [dev-dependencies.dirs]
 version = "5.0.1"
