@@ -10,6 +10,7 @@ pub fn home_dir() -> Option<std::path::PathBuf> {
             {
                 let w = unsafe { core::slice::from_raw_parts(p, Globalization::lstrlenW(p) as _) };
                 let o: std::ffi::OsString = std::os::windows::ffi::OsStringExt::from_wide(w);
+
                 Some(o.into())
             } else {
                 None
