@@ -1,4 +1,4 @@
-/// Return the path of the user's home directory.
+/// Returns the user's home directory path.
 pub fn home_dir() -> Option<std::path::PathBuf> {
     #[cfg(target_family = "windows")]
     {

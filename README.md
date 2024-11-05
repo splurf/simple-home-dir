@@ -1,18 +1,17 @@
 # simple-home-dir
 [![Crate](https://img.shields.io/crates/v/simple-home-dir.svg)](https://crates.io/crates/simple-home-dir)
 
-An extremely tiny and reliable Rust library purposed to retrieve the user's home directory.
+A minimal, fast, and reliable crate dedicated to retrieving the user's home directory.
 
 ## Usage
 ```rust
 use simple_home_dir::*;
 
 fn main() {
-    // Windows => "C:\Users\<USER>"
-    // Linux   => "/home/<USER>"
-    // Mac     => "/Users/<USER>"
+    // Windows  =>  C:\Users\jdoe
+    // Linux    =>  /home/jdoe
+    // Mac      =>  /Users/jdoe
     let path = home_dir().unwrap();
-    println!("{:?}", path)
 }
 ```
 

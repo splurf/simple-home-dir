@@ -1,11 +1,11 @@
 [package]
 name = "simple-home-dir"
-version = "0.4.3"
+version = "0.4.4"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
-description = "Efficiently retrieve the user's home directory."
+description = "Effortlessly retrieve the user's home directory (cross-platform)."
 keywords = ["home", "directory", "fast", "path", "lightweight"]
 categories = ["accessibility"]
 exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
@@ -21,9 +21,9 @@ features = [
     "Win32_UI_Shell",
 ]
 
+[dev-dependencies.dirs]
+version = "5.0.1"
+
 [profile.release]
 lto = true
 codegen-units = 1
-
-[dev-dependencies.dirs]
-version = "5.0.1"
