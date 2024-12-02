@@ -1,6 +1,6 @@
 [package]
 name = "simple-home-dir"
-version = "0.4.4"
+version = "0.4.5"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
@@ -21,9 +21,9 @@ features = [
     "Win32_UI_Shell",
 ]
 
-[dev-dependencies.dirs]
-version = "5.0.1"
-
 [profile.release]
 lto = true
 codegen-units = 1
+
+[dev-dependencies.dirs]
+version = "5.0.1"
