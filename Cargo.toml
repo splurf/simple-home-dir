@@ -1,6 +1,6 @@
 [package]
 name = "simple-home-dir"
-version = "0.4.5"
+version = "0.4.6"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
@@ -26,4 +26,4 @@ lto = true
 codegen-units = 1
 
 [dev-dependencies.dirs]
-version = "5.0.1"
+version = "6.0.0"
