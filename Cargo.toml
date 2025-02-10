@@ -1,6 +1,6 @@
 [package]
 name = "simple-home-dir"
-version = "0.4.6"
+version = "0.4.7"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
@@ -8,7 +8,7 @@ authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "Effortlessly retrieve the user's home directory (cross-platform)."
 keywords = ["home", "directory", "fast", "path", "lightweight"]
 categories = ["accessibility"]
-exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
+exclude = [".github/", ".gitignore", "LICENSE", "tests/"]
 
 [target.'cfg(windows)'.dependencies.windows-sys]
 version = "0.59.0"
