@@ -1,29 +1,15 @@
 [package]
 name = "simple-home-dir"
-version = "0.4.7"
-edition = "2021"
+version = "0.5.0"
+edition = "2024"
 license = "MIT"
 repository = "https://github.com/splurf/simple-home-dir"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
-description = "Effortlessly retrieve the user's home directory (cross-platform)."
-keywords = ["home", "directory", "fast", "path", "lightweight"]
+description = "Deprecated: This crate is no longer necessary as Rust now provides an official home_dir() method. Use `std::env::home_dir()` instead."
+keywords = ["home", "directory", "home_dir"]
 categories = ["accessibility"]
-exclude = [".github/", ".gitignore", "LICENSE", "tests/"]
-
-[target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.59.0"
-features = [
-    "Win32_Foundation",
-    "Win32_Globalization",
-    "Win32_System",
-    "Win32_System_Com",
-    "Win32_UI",
-    "Win32_UI_Shell",
-]
+exclude = [".github/", ".gitignore", "LICENSE"]
 
 [profile.release]
 lto = true
 codegen-units = 1
-
-[dev-dependencies.dirs]
-version = "6.0.0"
